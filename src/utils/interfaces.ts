@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 
 export interface Product {
   _id?: Types.ObjectId;
-  categoryId: Types.ObjectId;
+  category: Category;
   name: string;
   description: string;
   price: number;
