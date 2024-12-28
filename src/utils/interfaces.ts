@@ -26,6 +26,21 @@ export interface User {
   profilePicture: string;
 }
 
+export interface Order {
+  _id?: Types.ObjectId;
+  grandTotal: number;
+  status: string[];
+  orderDetails: OrderDetail[];
+  createdBy: Types.ObjectId;
+}
+
+export interface OrderDetail {
+  _id?: Types.ObjectId;
+  product: Product;
+  qty: number;
+  order: Order;
+}
+
 type TLoginBody = Yup.InferType<ReturnType<typeof Validator.loginSchema>>;
 type TRegisterBody = Yup.InferType<ReturnType<typeof Validator.registerSchema>>;
 
@@ -48,6 +63,11 @@ export interface ILoginPayload {
   password: string;
 }
 
+export interface OrderItems {
+  productId: Types.ObjectId;
+  quantity: number;
+}
+
 export interface IUserToken
   extends Omit<
     User,
@@ -66,4 +86,8 @@ export interface IPaginationQuery {
   page: number;
   limit: number;
   search?: string;
+}
+
+export interface IRequestWithUser extends Request {
+  user?: IUserToken;
 }

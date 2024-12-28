@@ -1,5 +1,6 @@
 import ProductModel from "../models/products.model";
 import { Product } from "../utils/interfaces";
+import { Types } from "mongoose";
 
 class ProductsService {
   async findAll(
@@ -28,6 +29,22 @@ class ProductsService {
         _id: id,
       },
       data,
+      {
+        new: true,
+      }
+    );
+  }
+
+  async updateQty(id: Types.ObjectId, qty: number): Promise<Product | null> {
+    return await ProductModel.findByIdAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        $inc: {
+          qty: -qty,
+        },
+      },
       {
         new: true,
       }
