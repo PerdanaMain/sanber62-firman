@@ -1,8 +1,9 @@
-import express, { Request, Response } from "express";
-import database from "./utils/database";
-import { PORT, prefix } from "./utils/env";
 import bodyParser from "body-parser";
 import cors from "cors";
+import express, { Request, Response } from "express";
+import router from "./routes/api";
+import database from "./utils/database";
+import { PORT, prefix } from "./utils/env";
 
 async function main() {
   const app = express();
@@ -20,6 +21,7 @@ async function main() {
     });
   });
 
+  app.use(router);
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}/api`);
   });
