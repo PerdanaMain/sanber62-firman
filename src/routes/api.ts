@@ -1,9 +1,14 @@
 import { Router } from "express";
 import CategoriesController from "../controller/categories.controller";
 import ProductController from "../controller/products.controller";
+import AuthController from "../controller/auth.controller";
 import { prefix } from "../utils/env";
 
 const router = Router();
+
+// AUTH
+router.post(prefix + "/register", AuthController.register);
+router.post(prefix + "/login", AuthController.login);
 
 // CRUD Categories
 router.get(prefix + "/categories", CategoriesController.index);
