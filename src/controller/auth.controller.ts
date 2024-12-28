@@ -45,14 +45,14 @@ class AuthController {
         password,
       });
 
-      const user = await AuthService.login({
+      const token = await AuthService.login({
         email,
         password,
       });
 
       res.status(200).json({
         status: true,
-        data: user,
+        data: token,
         message: "Success login",
       });
     } catch (error) {

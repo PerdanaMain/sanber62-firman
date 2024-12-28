@@ -1,6 +1,7 @@
 import UserModel from "../models/users.model";
 import { encrypt } from "../utils/encryption";
 import { IRegisterPayload, ILoginPayload, User } from "../utils/interfaces";
+import JWT from "../utils/jwt";
 
 class AuthService {
   async register(payload: IRegisterPayload): Promise<User> {
@@ -14,7 +15,7 @@ class AuthService {
     });
   }
 
-  async login(payload: ILoginPayload): Promise<User | null> {
+  async login(payload: ILoginPayload): Promise<String> {
     const { email, password } = payload;
     const userByEmail = await UserModel.findOne({
       email,
@@ -28,7 +29,11 @@ class AuthService {
     if (!validatePassword)
       return Promise.reject(new Error("password: user not found"));
 
-    return userByEmail;
+    const token = JWT.generateToken({
+      id: userByEmail._id,
+      roles: userByEmail.roles,
+    });
+    return token;
   }
 }
 

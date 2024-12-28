@@ -47,3 +47,23 @@ export interface ILoginPayload {
   email: string;
   password: string;
 }
+
+export interface IUserToken
+  extends Omit<
+    User,
+    | "password"
+    | "activationCode"
+    | "isActive"
+    | "email"
+    | "fullName"
+    | "profilePicture"
+    | "username"
+  > {
+  id?: Types.ObjectId;
+}
+
+export interface IPaginationQuery {
+  page: number;
+  limit: number;
+  search?: string;
+}

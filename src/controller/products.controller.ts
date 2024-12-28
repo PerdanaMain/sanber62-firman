@@ -1,11 +1,25 @@
 import { Request, Response } from "express";
 import { MongooseError } from "mongoose";
 import ProductsService from "../services/products.service";
+import { IPaginationQuery } from "../utils/interfaces";
 
 class ProductsController {
   async index(req: Request, res: Response) {
     try {
-      const result = await ProductsService.findAll();
+      const {
+        limit = 10,
+        page = 1,
+        search,
+      } = req.query as unknown as IPaginationQuery;
+      const query = {};
+
+      if (search) {
+        Object.assign(query, {
+          name: { $regex: search, $options: "i" },
+        });
+      }
+
+      const result = await ProductsService.findAll(query, limit, page);
       res.status(200).json({
         status: true,
         message: "Success get all products",
