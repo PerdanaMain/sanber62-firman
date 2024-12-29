@@ -5,6 +5,18 @@ import { IPaginationQuery } from "../utils/interfaces";
 
 class ProductsController {
   async index(req: Request, res: Response) {
+    /**
+     #swagger.tags = ['Products']
+     #swagger.security = [{
+      "bearerAuth": []
+     }]
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/ProductCreateRequest"
+      }
+     }
+     */
     try {
       const {
         limit = 10,
@@ -36,6 +48,9 @@ class ProductsController {
   }
 
   async show(req: Request, res: Response) {
+    /**
+     #swagger.tags = ['Products']
+     */
     try {
       const id = req.params?.id;
       const result = await ProductsService.findById(id);
@@ -72,6 +87,18 @@ class ProductsController {
     }
   }
   async update(req: Request, res: Response) {
+    /**
+     #swagger.tags = ['Products']
+     #swagger.security = [{
+      "bearerAuth": []
+     }]
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/ProductCreateRequest"
+      }
+     }
+    */
     try {
       const id = req.params?.id;
       const data = req.body;

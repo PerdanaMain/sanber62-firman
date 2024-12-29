@@ -5,6 +5,15 @@ import Validator from "../utils/validator";
 
 class AuthController {
   async register(req: IRequestRegister, res: Response) {
+    /**
+     #swagger.tags = ['Auth']
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/RegisterRequest"
+      }
+     }
+     */
     try {
       const { username, email, password, confirmPassword, roles } = req.body;
 
@@ -37,6 +46,15 @@ class AuthController {
     }
   }
   async login(req: Request, res: Response) {
+    /**
+     #swagger.tags = ['Auth']
+     #swagger.requestBody = {
+      required: true,
+      schema: {
+        $ref: "#/components/schemas/LoginRequest"
+      }
+     }
+     */
     try {
       const { email, password } = req.body;
 

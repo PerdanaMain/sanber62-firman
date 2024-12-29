@@ -91,3 +91,8 @@ export interface IPaginationQuery {
 export interface IRequestWithUser extends Request {
   user?: IUserToken;
 }
+
+export interface CustomError extends Error {
+  status?: number;
+  message: string;
+}

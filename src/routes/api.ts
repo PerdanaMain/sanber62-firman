@@ -5,7 +5,6 @@ import AuthController from "../controller/auth.controller";
 import OrdersController from "../controller/orders.controller";
 import AuthMiddleware from "../middlewares/auth.middleware";
 import { prefix } from "../utils/env";
-import authMiddleware from "../middlewares/auth.middleware";
 
 const router = Router();
 
@@ -30,12 +29,12 @@ router.delete(prefix + "/products/:id", ProductsController.destroy);
 // CRUD Orders
 router.get(
   prefix + "/orders",
-  authMiddleware.verifyToken,
+  AuthMiddleware.verifyToken,
   OrdersController.index
 );
 router.post(
   prefix + "/orders",
-  authMiddleware.verifyToken,
+  AuthMiddleware.verifyToken,
   OrdersController.store
 );
 

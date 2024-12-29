@@ -1,9 +1,14 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
+import fs from "fs";
+import path from "path";
+import swaggerUi from "swagger-ui-express";
+import swaggerOutput from "./docs/swagger_output.json";
 import router from "./routes/api";
 import database from "./utils/database";
 import { PORT, prefix } from "./utils/env";
+import { CustomError } from "./utils/interfaces";
 
 async function main() {
   const app = express();
@@ -22,6 +27,29 @@ async function main() {
   });
 
   app.use(router);
+
+  const css = fs.readFileSync(
+    path.resolve(__dirname, "../node_modules/swagger-ui-dist/swagger-ui.css"),
+    "utf-8"
+  );
+  app.use(
+    "/docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerOutput, {
+      customCss: css,
+    })
+  );
+
+  app.use(
+    (err: CustomError, req: Request, res: Response, next: NextFunction) => {
+      console.error(err.stack); // Log error ke console
+      res.status(err.status || 500).json({
+        success: false,
+        message: err.message || "Internal Server Error",
+      });
+    }
+  );
+
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}/api`);
   });
