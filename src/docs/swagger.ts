@@ -11,7 +11,7 @@ const doc = {
   },
   servers: [
     {
-      url: "https://sanber62-firman.vercel.app/",
+      url: "https://sanber62-firman.vercel.app/api",
       description: "Local Server",
     },
   ],
