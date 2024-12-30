@@ -12,6 +12,10 @@ const doc = {
   servers: [
     {
       url: "https://sanber62-firman.vercel.app/api",
+      description: "Live Server",
+    },
+    {
+      url: "http://localhost:3000/api",
       description: "Local Server",
     },
   ],
@@ -24,14 +28,14 @@ const doc = {
     },
     schemas: {
       LoginRequest: {
-        email: "firman.fp123@gmail.com",
-        password: "password",
+        email: "xxx",
+        password: "xxx",
       },
       RegisterRequest: {
         username: "test username",
-        email: "firman.fp123@gmail.com",
-        password: "password",
-        confirmPassword: "password",
+        email: "xxx",
+        password: "xxx",
+        confirmPassword: "xxx",
         roles: ["user"],
       },
       ProductRequest: {

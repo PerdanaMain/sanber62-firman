@@ -7,6 +7,10 @@
   },
   "servers": [
     {
+      "url": "https://sanber62-firman.vercel.app/api",
+      "description": "Live Server"
+    },
+    {
       "url": "http://localhost:3000/api",
       "description": "Local Server"
     }
@@ -194,7 +198,8 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": ["Products"],
+        "description": "Create Product",
         "responses": {
           "201": {
             "description": "Created"
@@ -202,28 +207,13 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductRequest"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductRequest"
-              }
-            }
-          }
         }
       }
     },
     "/products/{id}": {
       "get": {
         "tags": ["Products"],
-        "description": "",
+        "description": "Get Product By Id",
         "parameters": [
           {
             "name": "id",
@@ -245,7 +235,7 @@
       },
       "put": {
         "tags": ["Products"],
-        "description": "",
+        "description": "Update Product",
         "parameters": [
           {
             "name": "id",
@@ -263,30 +253,11 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductCreateRequest"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/ProductCreateRequest"
-              }
-            }
-          }
         }
       },
       "delete": {
-        "description": "",
+        "tags": ["Products"],
+        "description": "Delete Product",
         "parameters": [
           {
             "name": "id",
@@ -309,7 +280,8 @@
     },
     "/orders": {
       "get": {
-        "description": "",
+        "tags": ["Orders"],
+        "description": "Get Orders",
         "parameters": [
           {
             "name": "limit",
@@ -344,7 +316,8 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": ["Orders"],
+        "description": "Create Order",
         "responses": {
           "200": {
             "description": "OK"
